@@ -17,12 +17,12 @@ export default function RouteSelection() {
     localStorage.removeItem("reservedSeats");
     localStorage.removeItem("nameData");
     localStorage.clear();
-    navigate.push("/");
+    navigate("/");
   };
 
   const handleLogoClick = (e) => {
     e.preventDefault();
-    navigate.push("/routes");
+    navigate("/routes");
   };
 
   return (
@@ -34,7 +34,7 @@ export default function RouteSelection() {
             className="navbar-brand Company-Log"
             onClick={(e) => handleLogoClick(e)}
           >
-            UT
+            Kachamale
           </a>
           <button
             className="navbar-toggler"

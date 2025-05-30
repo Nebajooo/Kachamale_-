@@ -13,7 +13,7 @@ export default function Homepage() {
   return (
     <div className="container maint-cnt">
       <div className="header-nav">
-        <span className="mytext1"> Unique Travels </span>
+        <span className="mytext1"> Kchamale Travels </span>
       </div>
 
       <div className="container">
@@ -21,7 +21,7 @@ export default function Homepage() {
           <h1>
             <span>always Travel</span>
             <div className="message">
-              <div className="word1">Uniquely</div>
+              <div className="word1">ካቻማሌ</div>
               <div className="word2">Safely</div>
               <div className="word3">with a smile</div>
             </div>

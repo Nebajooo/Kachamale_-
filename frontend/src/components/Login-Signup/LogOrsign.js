@@ -59,7 +59,7 @@ export default function LogOrsign() {
                     <li>
                       <a
                         href="/#"
-                        className="twitter"
+                        className="google"
                         onClick={(e) => e.preventDefault()}
                       >
                         <FaTwitterSquare />

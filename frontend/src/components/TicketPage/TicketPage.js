@@ -1,23 +1,30 @@
 import React from "react";
 import "./TicketPage.css";
 import { useNavigate } from "react-router-dom";
+
 export default function TicketPage() {
-  const navigate = useNavigate;
+  const navigate = useNavigate(); // ✅ Correct hook usage
+
   const handleSignOut = (e) => {
     e.preventDefault();
     sessionStorage.removeItem("authToken");
     localStorage.removeItem("reservedSeats");
     localStorage.removeItem("nameData");
-    localStorage.clear();
-    navigate.push("/");
+    localStorage.removeItem("selectedBusId");
+    localStorage.removeItem("date");
+    localStorage.removeItem("start");
+    localStorage.removeItem("destination");
+    navigate("/"); // ✅ Redirect to home
   };
+
   const handleBookAgainIcon = (e) => {
     e.preventDefault();
-    navigate.push("/routes");
+    navigate("/routes");
   };
+
   const getLocationData = () => {
-    let from = localStorage.getItem("start");
-    let to = localStorage.getItem("destination");
+    const from = localStorage.getItem("start");
+    const to = localStorage.getItem("destination");
     return (
       <div>
         <p>From: {from}</p>
@@ -25,36 +32,37 @@ export default function TicketPage() {
       </div>
     );
   };
+
   const getPassengerName = () => {
-    let nameArray = localStorage.getItem("nameData");
-    let names = JSON.parse(nameArray);
-    return names.map((name, idx) => {
-      return (
-        <div key={idx}>
-          <p className="names">{name}</p>
-        </div>
-      );
-    });
+    const nameArray = localStorage.getItem("nameData");
+    const names = nameArray ? JSON.parse(nameArray) : [];
+    return names.map((name, idx) => (
+      <div key={idx}>
+        <p className="names">{name}</p>
+      </div>
+    ));
   };
+
   const getSeatNumbers = () => {
-    let noArray = localStorage.getItem("reservedSeats");
-    let arr = JSON.parse(noArray);
-    return arr.map((element, idx) => {
-      return (
-        <div key={idx}>
-          <p classsName="seatNo">{element}</p>
-        </div>
-      );
-    });
+    const noArray = localStorage.getItem("reservedSeats");
+    const arr = noArray ? JSON.parse(noArray) : [];
+    return arr.map((element, idx) => (
+      <div key={idx}>
+        <p className="seatNo">{element}</p> {/* ✅ fixed typo */}
+      </div>
+    ));
   };
+
   const getIdNumber = () => {
-    let tokenData = localStorage.getItem("selectedBusId");
+    const tokenData = localStorage.getItem("selectedBusId");
     return <p className="idData">{tokenData}</p>;
   };
+
   const getDateValue = () => {
-    let dat = localStorage.getItem("date");
+    const dat = localStorage.getItem("date");
     return <p>On: {dat}, 10 AM (Hourly commute)</p>;
   };
+
   return (
     <div className="container">
       <div>
@@ -82,7 +90,7 @@ export default function TicketPage() {
                 <a
                   href="/#"
                   className="nav-link waves-effect waves-light"
-                  onClick={(e) => handleBookAgainIcon(e)}
+                  onClick={handleBookAgainIcon}
                 >
                   Book Again
                 </a>
@@ -91,7 +99,7 @@ export default function TicketPage() {
                 <a
                   href="/#"
                   className="nav-link waves-effect waves-light"
-                  onClick={(e) => handleSignOut(e)}
+                  onClick={handleSignOut}
                 >
                   Sign-Out
                 </a>
@@ -100,15 +108,18 @@ export default function TicketPage() {
           </div>
         </nav>
       </div>
+
       <div className="tpMain">
         <article className="ticket">
           <header className="ticket__wrapper">
             <div className="ticket__header">1 🎟 UNIQUE TRAVELS</div>
           </header>
+
           <div className="ticket__divider">
             <div className="ticket__notch"></div>
             <div className="ticket__notch ticket__notch--right"></div>
           </div>
+
           <div className="ticket__body">
             <section className="ticket__section">
               {getLocationData()}
@@ -117,15 +128,18 @@ export default function TicketPage() {
                 Your seats are together <span>{getDateValue()}</span>
               </p>
             </section>
+
             <section className="ticket__section">
               <h3>Passenger Names</h3>
               {getPassengerName()}
             </section>
+
             <section className="ticket__section">
               <h3>Payment Method</h3>
               <p>Credit Card</p>
             </section>
           </div>
+
           <footer className="ticket__footer">
             <p>Transaction-ID</p>
             {getIdNumber()}
