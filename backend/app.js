@@ -47,6 +47,7 @@ app.use(
   passport.authenticate("jwt", { session: false }),
   loggedInPage
 );
+app.use("/bus", require("./routes/bus"));
 
 // Start server
 app.listen(PORT, () => {

@@ -5,7 +5,8 @@ import PaymentTab from "../PaymentTab/PaymentTab";
 import { useNavigate } from "react-router-dom";
 
 export default function RouteSelection() {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
+
   const handleUserIcon = (e) => {
     e.preventDefault();
     navigate("/profile");

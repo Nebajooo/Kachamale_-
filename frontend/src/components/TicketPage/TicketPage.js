@@ -68,7 +68,7 @@ export default function TicketPage() {
       <div>
         <nav className="mb-4 navbar navbar-expand-lg navbar-dark bg-unique hm-gradient">
           <a href="/#" className="navbar-brand Company-Log">
-            UT
+            Kachamale
           </a>
           <button
             className="navbar-toggler"
@@ -112,7 +112,7 @@ export default function TicketPage() {
       <div className="tpMain">
         <article className="ticket">
           <header className="ticket__wrapper">
-            <div className="ticket__header">1 🎟 UNIQUE TRAVELS</div>
+            <div className="ticket__header">1 🎟 KACHAMALE TRAVELS</div>
           </header>
 
           <div className="ticket__divider">

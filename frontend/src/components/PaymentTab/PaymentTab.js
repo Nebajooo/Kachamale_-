@@ -208,7 +208,7 @@ export default class App extends React.Component {
                   {this.renderNamesOfPassenger()} <hr className="hr3" />
                   <p className="hdng"> Ticket price </p>{" "}
                   <p className="hdng"> Tax </p>{" "}
-                  <p className="hdng"> Toal Sum </p>{" "}
+                  <p className="hdng"> Total Sum </p>{" "}
                 </div>{" "}
                 <div className="col-6">
                   <hr className="hr3" />

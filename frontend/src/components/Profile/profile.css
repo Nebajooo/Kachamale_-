@@ -35,9 +35,9 @@ body {
   border: 2px solid #fff;
 }
 
-.location p {
+/* .location p {
   display: inline-block;
-}
+} */
 
 .location svg {
   vertical-align: middle;

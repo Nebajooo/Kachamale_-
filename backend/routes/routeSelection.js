@@ -1,65 +1,38 @@
-const express = require("express");
-const router = express.Router();
-const Bus = require("../models/Buses");
+var express = require("express");
+var router = express.Router();
+var bus = require("../models/Buses");
 
-// Search buses by startCity and destination
-router.post("/search", async (req, res) => {
-  const { startCity, destination } = req.body;
+// router.get('/', (req, res) => {
+//     bus.find({ companyName, startCity, totalseats, availableseats }, (err, result) => {
+//         if (err) res.send(err)
+//         else res.json({ result })
+//     })
+// })
 
-  if (!startCity || !destination) {
-    return res
-      .status(400)
-      .json({
-        status: false,
-        message: "startCity and destination are required",
-      });
-  }
-
-  try {
-    const buses = await Bus.find({ startCity, destination });
-    res.json({ status: true, buses });
-  } catch (err) {
-    console.error("Error searching buses:", err);
-    res.status(500).json({ status: false, message: "Error while searching" });
-  }
+router.post("/", (req, res) => {
+  bus
+    .find({ startCity: req.body.startCity, destination: req.body.destination })
+    .exec((err, bus) => {
+      if (err) {
+        res.json({ status: false, message: "error while searching" });
+      } else res.json({ bus });
+    });
 });
 
-// Get bus by ID
-router.post("/getById", async (req, res) => {
-  const { bId } = req.body;
-
-  if (!bId) {
-    return res
-      .status(400)
-      .json({ status: false, message: "Bus ID (bId) is required" });
-  }
-
-  try {
-    const bus = await Bus.findById(bId);
-    if (!bus) {
-      return res.status(404).json({ status: false, message: "Bus not found" });
-    }
-    res.json({ status: true, bus });
-  } catch (err) {
-    console.error("Error finding bus by ID:", err);
-    res
-      .status(500)
-      .json({ status: false, message: "Error while searching with ID" });
-  }
+router.post("/", (req, res) => {
+  bus.findOne({ _id: req.body.bId }, (err, bus) => {
+    if (err) {
+      res.json({ status: false, message: "error while searching with ID" });
+    } else res.json({ bus });
+  });
 });
 
-// Create a new bus (uncomment if needed)
-router.post("/create", async (req, res) => {
-  try {
-    const newBus = new Bus(req.body);
-    const savedBus = await newBus.save();
-    res.status(201).json({ status: true, bus: savedBus });
-  } catch (err) {
-    console.error("Error creating bus:", err);
-    res
-      .status(500)
-      .json({ status: false, message: "Error while creating bus" });
-  }
+router.post("/", (req, res) => {
+  let newBus = new bus(req.body);
+  newBus.save((err, bus) => {
+    if (err) console.log(err);
+    else res.status(201).json(bus);
+  });
 });
 
 module.exports = router;
